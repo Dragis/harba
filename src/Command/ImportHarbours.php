@@ -30,11 +30,6 @@ class ImportHarbours extends Command
         parent::__construct($name);
     }
 
-    protected function configure()
-    {
-        parent::configure();
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $response = $this->httpClient->request(Request::METHOD_GET, self::HARBOURS_GET_URL);

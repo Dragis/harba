@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Harbour;
 use App\Repository\HarbourRepository;
 use http\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,7 +53,7 @@ class HarbourController extends AbstractController
         return new JsonResponse($response, Response::HTTP_OK);
     }
 
-    private function getWeatherData(?\App\Entity\Harbour $harbour): array
+    private function getWeatherData(Harbour $harbour): array
     {
         $openWeatherApiKey = $this->parameterBag->get('open_weather_api_key');
 
