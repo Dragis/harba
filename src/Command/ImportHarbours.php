@@ -32,6 +32,8 @@ class ImportHarbours extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $imported = 0;
+        $updated = 0;
         $response = $this->httpClient->request(Request::METHOD_GET, self::HARBOURS_GET_URL);
         $harbours = json_decode($response->getContent(), true);
 
@@ -39,8 +41,10 @@ class ImportHarbours extends Command
             $harbour = $this->harbourRepository->findOneBy(['uuid' => $harbourArray['id']]);
 
             if (null === $harbour) {
+                $imported++;
                 $this->mapHarbour($harbourArray, $harbour = new Harbour());
             } else {
+                $updated++;
                 $this->mapHarbour($harbourArray, $harbour);
             }
 
@@ -48,6 +52,7 @@ class ImportHarbours extends Command
         }
 
         $this->entityManager->flush();
+        $output->writeln(sprintf('Imported %s, updated %s harbours', $imported, $updated));
 
         return Command::SUCCESS;
     }

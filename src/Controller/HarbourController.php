@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Harbour;
 use App\Repository\HarbourRepository;
-use http\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
